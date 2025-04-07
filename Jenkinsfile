@@ -50,9 +50,22 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Develop') {
+            when { branch 'develop' }  
+            agent { label 'StagingServer' }  // Deploy to staging server
+            steps {
+                dir("/var/www/html") {
+                    unstash "maven-build"
+                }
+                sh """
+                cd /var/www/html/
+                jar -xvf webapp.war
+                """
+            }
+        }
 
         stage('Deploy to Staging') {
-            when { branch 'main' }  
+            when { branch 'Staging' }  
             agent { label 'StagingServer' }  // Deploy to staging server
             steps {
                 dir("/var/www/html") {
@@ -66,7 +79,7 @@ pipeline {
         }
 
         stage('Deploy to Production') {
-            when { branch 'release' }
+            when { branch 'master' }
             agent { label 'ProdServer' }  // Deploy to production server
             steps {
                 timeout(time:5, unit:'DAYS') {
