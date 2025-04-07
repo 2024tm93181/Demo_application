@@ -50,8 +50,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Develop') {
-            when { branch 'develop' }  
+        stage('Deploy to Develop') { 
             agent { label 'DevServer' }  // Deploy to Dev server
             steps {
                 dir("/var/www/html") {
@@ -65,7 +64,6 @@ pipeline {
         }
 
         stage('Deploy to Staging') {
-            when { branch 'Staging' }  
             agent { label 'StagingServer' }  // Deploy to staging server
             steps {
                 dir("/var/www/html") {
