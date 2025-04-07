@@ -66,7 +66,7 @@ pipeline {
         }
 
         stage('Deploy to Production') {
-            when { branch 'release' }
+            when { branch 'master' }
             agent { label 'ProdServer' }  // Deploy to production server
             steps {
                 timeout(time:5, unit:'DAYS') {
