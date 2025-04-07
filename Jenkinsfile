@@ -52,7 +52,7 @@ pipeline {
         }
 
         stage('Deploy to Staging') {
-            when { branch 'main' }  
+            when { branch 'Staging' }  
             agent { label 'StagingServer' }  // Deploy to staging server
             steps {
                 dir("/var/www/html") {
