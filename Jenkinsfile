@@ -50,7 +50,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Develop') {
+        stage('Deploy to Develop') { 
             agent { label 'DevServer' }  // Deploy to Dev server
             steps {
                 dir("/var/www/html") {
