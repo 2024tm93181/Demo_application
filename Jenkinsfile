@@ -52,7 +52,7 @@ pipeline {
         }
         stage('Deploy to Develop') {
             when { branch 'develop' }  
-            agent { label 'StagingServer' }  // Deploy to staging server
+            agent { label 'DevServer' }  // Deploy to Dev server
             steps {
                 dir("/var/www/html") {
                     unstash "maven-build"
